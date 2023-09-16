@@ -15,7 +15,7 @@ const camera = new THREE.PerspectiveCamera(
   0.1,
   1000
 );
-
+camera.filmOffset = 1;
 //Keep the 3D object on a global variable so we can access it later
 let object;
 
@@ -25,18 +25,17 @@ let objToRender = "eye";
 const loader = new GLTFLoader();
 
 //Set how far the camera will be from the 3D model
-camera.position.z = objToRender === "dino" ? 25 : 500;
+camera.position.z = objToRender === "dino" ? 500 : 500;
 
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
-controls.minDistance = 4;
+controls.minDistance = 0;
 controls.maxDistance = 10;
 controls.enableZoom = true;
 controls.autoRotate = false;
 controls.maxPolarAngle = 1.56550731330353;
-controls.minPolarAngle = 0.5;
-0.9021104211297939;
-
+controls.minPolarAngle = 0.63469453089671;
+controls.maxDistance = 6.634204312890614;
 //Add lights to the scene, so we can actually see the 3D model
 const topLight = new THREE.DirectionalLight(0xffffff, 1); // (color, intensity)
 topLight.position.set(500, 500, 500); //top-left-ish
@@ -70,7 +69,7 @@ loader.load(
 function animate() {
   requestAnimationFrame(animate);
   console.log("getPolarAnglecontrols", controls.getPolarAngle());
-  //console.log("getPolarAnglecontrols",());
+  console.log("getPolarzoom", controls.getDistance());
   controls.update();
   renderer.render(scene, camera);
 }
